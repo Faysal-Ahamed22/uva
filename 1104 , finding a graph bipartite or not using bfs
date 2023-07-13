@@ -1,0 +1,65 @@
+
+#include<bits/stdc++.h>
+using namespace std;
+#define ll   long long
+#define pb   push_back
+#define yes   cout<<"YES"<<endl
+#define no   cout<<"NO"<<endl
+#define all(x) (x).begin(), (x).end()
+#define    gcd(a,b)      __gcd(a,b)
+#define    lcm(a,b)  (a*b)/__gcd(a,b)
+#define optimize() ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+const ll mx=212; 
+vector<ll>adj[mx];
+ll col[mx];
+
+bool IsBipartite( ll s )
+{
+    memset(col , -1, sizeof(col));
+    col[s]=1; 
+    queue<ll>q; 
+    q.push(s);
+    while(!q.empty())
+    {
+        ll u=q.front();
+        q.pop();
+        for(auto v: adj[u])
+        {
+            if(col[v]==-1)
+            {
+                if(col[u]==1)col[v]=2; 
+                else col[v]=1; 
+                q.push(v);
+            }
+            else if(col[v]==col[u])return 0; 
+        }
+    }
+    return 1; 
+
+
+}
+
+int main()
+{
+    optimize();
+   ll n; 
+   while(cin>>n)
+   {
+    if(n==0)break;
+    for(ll i=0; i<=n; i++)adj[i].clear();
+    ll m; 
+    cin>>m; 
+    for(ll i=0; i<m; i++)
+    {
+        ll u,v; 
+        cin>>u>>v; 
+        adj[u].pb(v);
+        adj[v].pb(u);
+        
+    } 
+    if(IsBipartite(0))cout<<"BICOLORABLE."<<endl;
+    else cout<<"NOT BICOLORABLE."<<endl;
+
+   }
+}
+/*****************  ALHAMDULILLAH  *****************/
