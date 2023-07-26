@@ -1,0 +1,45 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll   long long
+#define pb   push_back
+#define yes   cout<<"YES"<<endl
+#define no   cout<<"NO"<<endl
+#define all(x) (x).begin(), (x).end()
+#define    gcd(a,b)      __gcd(a,b)
+#define    lcm(a,b)  (a*b)/__gcd(a,b)
+#define optimize() ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+const ll mx=3e4+123; 
+ll coin[]={1, 5, 10, 25,50};
+ll dp[6][mx];
+
+ll solve(ll i, ll Tcoin ){
+
+    if(i==5 || Tcoin==0)return(Tcoin==0);
+    if(dp[i][Tcoin]!=-1)return dp[i][Tcoin];
+    ll ret=0; 
+    for(ll j=0; j<=Tcoin; j++)
+
+    {
+        if(Tcoin-(j*coin[i])>=0)ret+=solve(i+1, Tcoin-(j*coin[i]));
+        else break;
+    }
+    return dp[i][Tcoin]=ret;
+
+    
+}
+
+int main()
+{
+    optimize();
+     memset(dp, -1, sizeof(dp));
+    ll n; 
+    while(cin>>n)
+    {
+        //dont need to memset again bcz tha state on which dp are dependent dosent change ...
+       
+        ll ans=solve(0,n);
+        if(ans>1)
+        cout<<"There are "<<solve(0,n)<<" ways to produce "<<n<<" cents change."<<endl;
+        else cout<<"There is only "<<solve(0,n)<<" way to produce "<<n<<" cents change."<<endl;
+    }
+}
