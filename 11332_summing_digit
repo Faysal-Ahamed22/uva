@@ -1,0 +1,49 @@
+/******************************************************/
+/******************************************************/
+/**            BISMILLAHIR RAHMANIR RAHIM            **/
+/**         Md.Faysal Ahamed - ER3N YAGER            **/
+/**  Department of Computer Science and Engineering  **/
+/**               Barisal University                 **/
+/**               It's time to Roar.                 **/
+/******************************************************/
+/******************************************************/
+#include<bits/stdc++.h>
+using namespace std;
+#define ll   long long
+#define pb   push_back
+#define yes   cout<<"YES"<<endl
+#define no   cout<<"NO"<<endl
+#define all(x) (x).begin(), (x).end()
+#define    gcd(a,b)      __gcd(a,b)
+#define    lcm(a,b)  (a*b)/__gcd(a,b)
+#define optimize() ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+
+ll SOD( string s)
+{
+    ll nn=s.size();
+    ll ret=0; 
+    for(ll i=0; i<nn; i++)ret+=s[i]-'0';
+    return ret; 
+}
+
+int main()
+{
+    optimize();
+   ll n; 
+   while(cin>>n)
+   {
+    if(n==0)break;
+      string ans;
+        string s=to_string(n);
+         
+      while(1)
+      {
+         ll k=SOD(s);
+         s=to_string(k);
+         if(s.size()==1)break; 
+      }
+
+      cout<<s<<endl;
+   }
+}
+/*****************  ALHAMDULILLAH  *****************/
