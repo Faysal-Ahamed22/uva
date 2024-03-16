@@ -1,0 +1,48 @@
+/******************************************************/
+/******************************************************/
+/**            BISMILLAHIR RAHMANIR RAHIM            **/
+/**         Md.Faysal Ahamed - ER3N YAGER            **/
+/**  Department of Computer Science and Engineering  **/
+/**               Barisal University                 **/
+/**               It's time to Roar.                 **/
+/******************************************************/
+/******************************************************/
+#include<bits/stdc++.h>
+using namespace std;
+#define ll   long long
+#define pb   push_back
+#define yes   cout<<"YES"<<endl
+#define no   cout<<"NO"<<endl
+#define all(x) (x).begin(), (x).end()
+#define    gcd(a,b)      __gcd(a,b)
+#define    lcm(a,b)  (a*b)/__gcd(a,b)
+#define optimize() ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+
+ll mod( ll a, ll p , ll m)
+{
+
+     
+    ll res=1; 
+    a%=m;
+    while(p>0){
+        if(p&1)res=res*a%m;
+        p/=2;
+        a=a*a%m;
+    }
+    return res%m; 
+   
+}
+
+int main()
+{
+    optimize();
+    ll t; cin>>t; 
+   
+    while(t--)
+    {
+         ll b,p,m; 
+         cin>>b>>p>>m; 
+       cout<<mod(b,p,m)<<endl;
+    }
+}
+/*****************  ALHAMDULILLAH  *****************/
