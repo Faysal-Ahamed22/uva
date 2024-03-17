@@ -1,0 +1,50 @@
+#include<stdio.h>
+#include<string.h>
+
+
+char s1[505],s2[505];
+int dp[505][505];
+int n,m; 
+
+int min(int a, int b, int c)
+{
+    if(a<b && a<c)return a; 
+    if(b<a && b<c)return b; 
+    return c; 
+}
+
+int solve( int i, int j)
+{
+    if(i>=n)return m-j; 
+    if(j>=m)return n-i; 
+    if(dp[i][j]!=-1)return dp[i][j];
+    int ret; 
+    if(s1[i]==s2[j])ret=solve(i+1, j+1);
+    else{
+        int ret1 = 1 + solve ( i+1, j+1 );
+        int ret2 = 1 + solve ( i, j+1 ); 
+        int ret3 = 1 + solve ( i+1, j ); 
+        ret=min(ret1,ret2,ret3);
+    }
+
+    return dp[i][j]=ret; 
+}
+
+int main()
+{
+    while(scanf("%d %s", &n, s1) == 2)
+    {
+       
+         scanf("%d %s", &m, s2);
+         int i,j; 
+         for(i=0; i<505; i++)
+         {
+            for(j=0; j<505; j++)dp[i][j]=-1; 
+         }
+         int ans=solve(0,0);
+         printf("%d\n",ans);
+
+
+    }
+    return 0; 
+}
