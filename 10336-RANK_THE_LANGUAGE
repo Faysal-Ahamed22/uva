@@ -1,0 +1,102 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll   long long
+#define pb   push_back
+#define yes   cout<<"YES"<<endl
+#define no   cout<<"NO"<<endl
+#define all(x) (x).begin(), (x).end()
+#define    gcd(a,b)      __gcd(a,b)
+#define    lcm(a,b)  (a*b)/__gcd(a,b)
+#define optimize() ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+
+const ll mx=1e3; 
+bool vis[mx][mx]; 
+char grid[mx][mx]; 
+const ll dx[4] = {1, -1, 0, 0};
+const ll dy[4] = {0, 0, 1, -1};
+ ll n,m; 
+char ch; 
+
+
+
+
+bool valid(int x,int y)
+{
+    if(x>=0 && x<n && y>=0 && y<m && grid[x][y]==ch && !vis[x][y]) return true;
+    return false;
+}
+
+void dfs( ll x, ll y)
+{
+    vis[x][y]=1; 
+      for(ll i=0; i<4; i++)
+    {
+        ll nx=x+dx[i];
+        ll ny=y+dy[i];
+      if(valid(nx,ny))
+      {
+          dfs(nx, ny);
+      }
+    }
+
+}
+
+void solve(){
+   
+    cin>>n>>m; 
+    set<char>s; 
+    vector<char>v; 
+    for(ll i=0; i<n; i++)
+    {
+        for(ll j=0; j<m; j++)cin>>grid[i][j],s.insert(grid[i][j]); 
+    }
+   
+
+    vector<pair<ll,char>>ans; 
+
+    for(auto u:s)
+    {
+        ll cnt=0; 
+        ch=u; 
+        for(ll i=0; i<n; i++)
+        {
+            for(ll j=0; j<m; j++)
+            {
+               if(grid[i][j]==ch && !vis[i][j])
+               {
+                  cnt++;
+                  dfs(i,j); 
+                   
+               }
+            }
+        } 
+    
+     ans.pb({cnt*-1,ch}); 
+
+    }
+    sort(all(ans)); 
+
+    for(auto u:ans)
+    {
+        cout<<u.second<<": "<<u.first*-1<<endl;
+       
+    } 
+  //  cout<<"Next"<<endl;
+
+
+
+}
+
+int main()
+{
+    optimize();
+    ll t;
+    cin>>t;
+    for(ll tc=1; tc<=t; tc++)
+    {
+        cout<<"World #"<<tc<<endl;
+       memset(vis, 0 , sizeof(vis)); 
+      
+        solve();
+    }
+}
