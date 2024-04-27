@@ -1,0 +1,78 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll   long long
+#define pb   push_back
+#define yes   cout<<"YES"<<endl
+#define no   cout<<"NO"<<endl
+#define all(x) (x).begin(), (x).end()
+#define    gcd(a,b)      __gcd(a,b)
+#define    lcm(a,b)  (a*b)/__gcd(a,b)
+#define optimize() ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+
+const ll mx=105; 
+bool vis[mx][mx]; 
+char grid[mx][mx]; 
+const ll dx[8] = {1, -1, 0, 0, 1, -1, 1, -1};
+const ll dy[8] = {0, 0, 1, -1, 1, -1, -1, 1};
+ll n,m;  
+
+
+
+
+bool valid(int x,int y)
+{
+    if(x>=0 && x<n && y>=0 && y<m && grid[x][y]=='@' && !vis[x][y]) return true;
+    return false;
+}
+
+void dfs( ll x, ll y)
+{
+    vis[x][y]=1; 
+      for(ll i=0; i<8; i++)
+    {
+        ll nx=x+dx[i];
+        ll ny=y+dy[i];
+      if(valid(nx,ny))
+      {
+          dfs(nx, ny);
+      }
+    }
+
+}
+
+
+
+int main()
+{
+    optimize();
+   while(cin>>n>>m)
+   {
+     if(n==0 && m==0)break; 
+     for(ll i=0; i<mx; i++)
+     {
+        for(ll j=0; j<mx; j++)vis[i][j]=0; 
+     }
+      
+    for(ll i=0; i<n; i++)
+    {
+        for(ll j=0; j<m; j++)cin>>grid[i][j]; 
+    }
+
+        ll cnt=0; 
+        for(ll i=0; i<n; i++)
+        {
+            for(ll j=0; j<m; j++)
+            {
+               if(grid[i][j]=='@'&& !vis[i][j])
+               {
+                  cnt++;
+                  dfs(i,j); 
+                   
+               }
+            }
+        } 
+
+        cout<<cnt<<endl;
+   }
+    
+}
