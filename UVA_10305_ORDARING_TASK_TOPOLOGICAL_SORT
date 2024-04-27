@@ -1,0 +1,60 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll   long long
+#define pb   push_back
+#define yes   cout<<"YES"<<endl
+#define no   cout<<"NO"<<endl
+#define all(x) (x).begin(), (x).end()
+#define    gcd(a,b)      __gcd(a,b)
+#define    lcm(a,b)  (a*b)/__gcd(a,b)
+#define optimize() ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+
+const ll mx=1e4+123; 
+vector<ll>adj[mx]; 
+
+ll n,m; 
+
+
+
+
+int main()
+{
+    while(1)
+    {
+     cin>>n>>m; 
+    if(n==0 && m==0)break; 
+    for(ll i=0; i<mx; i++)adj[i].clear();
+   
+    ll cnt=0; 
+    map<ll,ll>indeg; 
+    ll u,v; 
+    for(ll i=0; i<m; i++)
+    {
+        cin>>u>>v; 
+        adj[u].pb(v); 
+        indeg[v]++;
+    }
+    queue<ll>pq; 
+    for(ll i=1; i<=n; i++)
+    {
+        if(!indeg[i])pq.push(i); 
+    }
+     vector<ll>order; 
+    while(!pq.empty())
+    {
+        cnt++; 
+        ll x=pq.front(); 
+        order.pb(x); 
+        pq.pop();
+        for(auto u:adj[x])
+        {
+            indeg[u]--;  
+            if(indeg[u]==0)pq.push(u); 
+        }
+
+    }
+    for(auto u:order)cout<<u<<" "; cout<<endl;
+    }
+    
+}
+/*****************  ALHAMDULILLAH  *****************/
