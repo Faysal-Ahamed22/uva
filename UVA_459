@@ -1,0 +1,73 @@
+
+#include<stdio.h>
+#include<string.h>
+int parent[100]; 
+int  size[100]; 
+static char edge[2];
+ int number_of_node=0;
+
+void make( int v)
+{
+    parent[v]=v; 
+    size[v]=1; 
+}
+
+int find( int v)
+{
+    if(v==parent[v])return v; 
+    return parent[v]=find(parent[v]);
+}
+
+int Union( int a, int b)
+{
+    a=find(a); 
+    b=find(b); 
+    if(a!=b)
+    {
+        if(size[a]<size[b])
+        {
+            parent[a]=b; 
+            size[b]+=a; 
+        }
+        else{
+
+            parent[b]=a; 
+            size[a]+=b; 
+
+        }
+        number_of_node--;
+    }
+}
+
+int main()
+{
+    int test_case,i,j;
+    scanf("%d\n\n", &test_case); 
+     int marker = 0;
+    while(test_case--)
+    {
+        char ch; 
+        scanf("%c",&ch); 
+        getchar();
+        int n=ch-'A'+1; 
+        
+        for( i=0; i<n; i++)make(i);
+        number_of_node=n; 
+        char a,b; 
+       while(gets(edge) && strlen(edge)!=0)
+       {
+          
+           Union(edge[0]-'A', edge[1]-'A');
+       }
+
+        if(marker==1)putchar('\n');
+        marker=1; 
+            
+      
+       printf("%d\n",number_of_node);
+
+
+    }
+
+
+}
