@@ -1,0 +1,84 @@
+
+#include<stdio.h>
+#include<string.h>
+int parent[30012]; 
+int  size[30012]; 
+int ans=0; 
+
+int max(int a,int b)
+{
+    if(a>b)return a; 
+    return b;
+}
+
+
+void make( int v)
+{
+    parent[v]=v; 
+    size[v]=1; 
+}
+
+int find( int v)
+{
+    if(v==parent[v])return v; 
+    return parent[v]=find(parent[v]);
+}
+
+int Union( int a, int b)
+{
+    a=find(a); 
+    b=find(b); 
+    if(a!=b)
+    {
+        if(size[a]<size[b])
+        {
+            parent[a]=b; 
+            size[b]+=a; 
+            
+        }
+        else{
+
+            parent[b]=a; 
+            size[a]+=b; 
+           
+        }
+        
+    }
+}
+
+int main()
+{
+    
+     int test_case; 
+     scanf("%d",&test_case);
+     while(test_case--)
+     {
+
+        int citizen,friends;
+        int i;
+          scanf("%d%d",&citizen,&friends);
+         for(i=1; i<=citizen; i++)make(i);
+         i=1;
+        for(i=1; i<=friends; i++)
+        {
+            
+             int a,b; 
+             scanf("%d%d",&a,&b);
+             Union(a,b);
+         }
+           ans=0;
+        int frequancy[citizen+1];
+        i=1;
+        for(i=1; i<=citizen; i++)frequancy[i]=0;
+        i=1; 
+        for(i=1; i<=citizen; i++)frequancy[find(i)]++;
+       i=1;
+         for(i=1; i<=citizen; i++)ans=max(ans,frequancy[i]);
+        
+
+         printf("%d\n",ans);
+
+        
+
+     } 
+}
